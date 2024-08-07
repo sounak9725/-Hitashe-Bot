@@ -1,6 +1,5 @@
-const { SlashCommandBuilder, Client, CommandInteraction } = require('discord.js');
-// Assuming you have the User model for database operations
-const User = require('../../models/User'); 
+const { SlashCommandBuilder, Client, CommandInteraction, EmbedBuilder } = require('discord.js');
+const User = require('../../models/User'); // Adjust path as necessary
 
 // In-memory cooldown store
 const cooldowns = new Map();
@@ -26,7 +25,14 @@ module.exports = {
 
             if (remainingTime > 0) {
                 const remainingSeconds = Math.ceil(remainingTime / 1000);
-                return interaction.reply({ content: `You need to wait ${remainingSeconds} more seconds before using the /work command again.`, ephemeral: true });
+                const cooldownEmbed = new EmbedBuilder()
+                    .setColor('#FF0000')
+                    .setTitle('Cooldown')
+                    .setDescription(`You need to wait ${remainingSeconds} more seconds before using the /work command again.`)
+                    .setFooter({ text: `Requested by ${interaction.user.tag}` })
+                    .setTimestamp();
+
+                return interaction.reply({ embeds: [cooldownEmbed], ephemeral: true });
             }
         }
 
@@ -60,7 +66,14 @@ module.exports = {
         user.balance += totalAmount;
         await user.save();
 
-        await interaction.reply(`You worked hard and earned ${baseAmount} coins! Your bonus is ${bonus} coins. Your total balance is now ${user.balance} coins.`);
+        const workEmbed = new EmbedBuilder()
+            .setColor('#00FF00')
+            .setTitle('Work Result')
+            .setDescription(`You worked hard and earned ${baseAmount} coins!\nYour bonus is ${bonus} coins.\nYour total balance is now ${user.balance} coins.`)
+            .setFooter({ text: `Requested by ${interaction.user.tag}` })
+            .setTimestamp();
+
+        await interaction.reply({ embeds: [workEmbed] });
 
         // Clean up the cooldown entry after the cooldown time has passed
         setTimeout(() => cooldowns.delete(userId), cooldownTime);

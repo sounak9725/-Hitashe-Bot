@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, Client, CommandInteraction } = require('discord.js');
+const { SlashCommandBuilder, Client, CommandInteraction, EmbedBuilder } = require('discord.js');
 const User = require('../../models/User'); // Adjust path as necessary
 
 module.exports = {
@@ -15,9 +15,23 @@ module.exports = {
         const user = await User.findOne({ userId: interaction.user.id });
 
         if (!user) {
-            await interaction.reply({ content: 'You do not have any balance yet. Use /work to earn some coins.', ephemeral: false });
+            const noBalanceEmbed = new EmbedBuilder()
+                .setColor('#FF0000')
+                .setTitle('No Balance Found')
+                .setDescription('You do not have any balance yet. Use /work to earn some coins.')
+                .setFooter({ text: `Requested by ${interaction.user.tag}` })
+                .setTimestamp();
+
+            await interaction.reply({ embeds: [noBalanceEmbed], ephemeral: true });
         } else {
-            await interaction.reply({ content: `Your balance is **${user.balance}** coins. Your bank balance is **${user.bank}**. Use /deposit to deposit the balance in the bank and keep your money safe from robbers! :3`, ephemeral: false });
+            const balanceEmbed = new EmbedBuilder()
+                .setColor('#00FF00')
+                .setTitle('Your Balance')
+                .setDescription(`Your balance is **${user.balance}** coins. Your bank balance is **${user.bank}** coins. Use /deposit to deposit the balance in the bank and keep your money safe from robbers! :3`)
+                .setFooter({ text: `Requested by ${interaction.user.tag}` })
+                .setTimestamp();
+
+            await interaction.reply({ embeds: [balanceEmbed], ephemeral: false });
         }
     }
 };
