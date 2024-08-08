@@ -16,7 +16,7 @@ client.modals = new Collection();
 //#region Events
 client.once("ready", async () => {
   // Start of Bot Status
-  client.user.setActivity("Government Employees", { type: ActivityType.Watching });
+  client.user.setActivity("All memebrs!", { type: ActivityType.Watching });
   //End of bot status
 
   main().catch(err => console.log(err));
@@ -76,8 +76,8 @@ client.once("ready", async () => {
 
   await client.application.commands.set(globalCommands); //global commands (punishmentsubmission and backgroundcheckrequest)
 
-  await client.guilds.cache.get("1266109471944478831").commands.set(fisaCommands); // guild commands for FS Automations (includes the rest of the commands)
-  await client.guilds.cache.get("1266109471944478831").commands.set(fisaCommands); // this should be for FSS, suman add the FSS guild id here
+  await client.guilds.cache.get("1135369417845383252").commands.set(fisaCommands); // guild commands for FS Automations (includes the rest of the commands)
+  await client.guilds.cache.get("1135369417845383252").commands.set(fisaCommands); // this should be for FSS, suman add the FSS guild id here
   ready = true;
   toConsole("Client has logged in and is ready", new Error().stack, client);
 
