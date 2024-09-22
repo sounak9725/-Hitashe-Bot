@@ -15,11 +15,6 @@ module.exports = {
         .setName("roblox_user")
         .setDescription("Roblox username")
         .setRequired(true);
-    })
-    .addBooleanOption(option => {
-      return option  
-        .setName("ephemeral")
-        .setDescription("Whether or not the echo should be ephemeral");
     }),
     
   /**
@@ -28,8 +23,7 @@ module.exports = {
    * @param {CommandInteractionOptionResolver} options
    */
   run: async (client, interaction, options) => {
-    await interaction.deferReply();
-    const bol = await interaction.options.getBoolean("ephemeral");
+    //await interaction.deferReply();
     const username = await interaction.options.getString("roblox_user");
     let id;
     try {
@@ -101,8 +95,8 @@ module.exports = {
       },
       timestamp: new Date()
     })
-      .setColor(Colors.Red);
+      .setColor(Colors.Aqua);
       
-    interaction.editReply({embeds : [embed], ephemeral: bol});
+    interaction.reply({embeds : [embed]});
   }
 };
