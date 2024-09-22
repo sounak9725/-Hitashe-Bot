@@ -16,7 +16,7 @@ client.modals = new Collection();
 //#region Events
 client.once("ready", async () => {
   // Start of Bot Status
-  client.user.setActivity("All memebrs!", { type: ActivityType.Watching });
+  client.user.setActivity("Serving Rome!", { type: ActivityType.Watching });
   //End of bot status
 
   main().catch(err => console.log(err));
