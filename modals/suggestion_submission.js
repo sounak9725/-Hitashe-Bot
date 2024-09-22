@@ -35,7 +35,7 @@ module.exports = {
       }
     });
 
-    await client.channels.cache.get("1270680342164013158").send({ content: `New suggestion from ${interaction.user.tag} (${interaction.user.id})`, embeds: [embed] });
+    await client.channels.cache.get("1287407821998129254").send({ content: `<@&1232709447571214447> New suggestion from ${interaction.user.tag} (${interaction.user.id})`, embeds: [embed] });
     interaction.user.send({ content: "Thank you for your suggestion!", embeds: [embed] });
     return interaction.reply({ content: "Suggestion submitted! 📤", embeds: [embed], ephemeral: true });
   }

@@ -50,8 +50,10 @@ module.exports = {
 
         // Define role IDs and their respective bonuses
         const roleBonuses = {
-            '1270705630185001010': 10, // Replace ROLE_ID_1 with the actual role ID
-            '1270705578351788156': 20, // Replace ROLE_ID_2 with the actual role ID
+            '1232709452918947850': 10, // Replace ROLE_ID_1 with the actual role ID
+            '1232709449970618388': 20, // Replace ROLE_ID_2 with the actual role ID
+            '1232709447571214447': 40,
+            '1232709445436575764' : 100 
             // Add more roles and bonuses as needed
         };
 
