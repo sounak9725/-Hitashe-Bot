@@ -23,7 +23,7 @@ module.exports = {
    * @param {CommandInteractionOptionResolver} options
    */
   run: async (client, interaction, options) => {
-    //await interaction.deferReply();
+    await interaction.deferReply();
     const username = await interaction.options.getString("roblox_user");
     let id;
     try {
@@ -97,6 +97,6 @@ module.exports = {
     })
       .setColor(Colors.Aqua);
       
-    interaction.reply({embeds : [embed]});
+    await interaction.editReply({embeds : [embed]});
   }
 };
